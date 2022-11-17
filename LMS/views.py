@@ -6,7 +6,10 @@ def AddNewEmployee(request):
         form=EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('Employees')
+        return redirect(Employee)
     else:
         form=EmployeeForm
         return render(request,'AddNewEmployee.html')
+def Employee(request):
+    Employees=Employee.object.order_by('-ID')
+    return render(request,'employees.html')
